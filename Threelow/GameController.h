@@ -18,6 +18,8 @@
 
 @property (nonatomic,strong)NSMutableArray *heldDice;
 
+@property (nonatomic)NSInteger score;
+
 /*****METHODS*****/
 
 - (void)rollAllDice;

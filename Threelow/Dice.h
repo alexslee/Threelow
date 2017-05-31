@@ -20,4 +20,6 @@
 
 - (NSString *)getFace;
 
+- (NSInteger)getValue;
+
 @end

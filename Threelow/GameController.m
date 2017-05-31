@@ -13,31 +13,41 @@
 - (instancetype)init {
     if (self = [super init]) {
         _gameDice = [[NSMutableArray alloc] init];
+        
         for (unsigned i = 0; i < NUMBEROFDICE; i++) {
             _gameDice[i] = [[Dice alloc] init];
             [_gameDice[i] roll];
         }
+        
         _heldDice = [[NSMutableArray alloc] init];
+        
         for (unsigned i = 0; i < NUMBEROFDICE; i++) {
             _heldDice[i] = [[NSNumber alloc] initWithBool:NO];
         }
+        
+        _score = 0;
     }
     return self;
 }
 
 - (void)rollAllDice;
 {
+    
     for (unsigned i = 0; i < NUMBEROFDICE; i++) {
         NSNumber *shouldHold = [_heldDice objectAtIndex:i];
         //don't roll the die if it was held by the user
         if ([shouldHold boolValue] == NO) {
             [_gameDice[i] roll];
+        } else {
+            //if held, just add the value to the score
         }
     }
 }
 
 - (void)printFaces;
 {
+    _score = 0;
+    NSLog(@"=== Current game status ===");
     for (unsigned i = 0; i < NUMBEROFDICE; i++) {
         NSNumber *wasHeld = [_heldDice objectAtIndex:i];
         Dice *die = _gameDice[i];
@@ -46,9 +56,11 @@
         if ([wasHeld boolValue] == NO) {
             NSLog(@"Dice %tu: %@",[_gameDice indexOfObject:die],face);
         } else {
+            _score += [die getValue];
             NSLog(@"Dice %tu: [%@]",[_gameDice indexOfObject:die],face);
         }
     }
+    NSLog(@"Current score: %ld points",_score);
 }
 
 - (void)holdDie:(NSInteger)diceNum;

@@ -24,8 +24,9 @@ int main(int argc, const char * argv[]) {
         [gameController printFaces];
         
         BOOL play = YES;
+        BOOL hasHeld = NO;
         while (play) {
-            NSString *userInput = [inputHandler inputForPrompt:@"What would you like to do? (hint --> 'roll' to re-roll the dice | 'hold' to select dice to hold on to/un-hold) | 'reset' to un-hold all dice | 'print' to print all dice values and current score | 'quit' to stop playing: "];
+            NSString *userInput = [inputHandler inputForPrompt:@"What would you like to do? (hint --> 'roll' to re-roll the dice (must hold at least one die before rolling again!) | 'hold' to select dice to hold on to/un-hold) | 'reset' to un-hold all dice | 'print' to print all dice values and current score | 'quit' to stop playing: "];
             
             if ([userInput isEqualToString:@"quit"]) {
                 
@@ -34,9 +35,14 @@ int main(int argc, const char * argv[]) {
                 
             } else if ([userInput isEqualToString:@"roll"]) {
                 
-                NSLog(@"New values of dice (a face value wrapped in [] indicates that die has been held):");
-                [gameController rollAllDice];
-                [gameController printFaces];
+                if (hasHeld) {
+                    NSLog(@"New values of dice (a face value wrapped in [] indicates that die has been held):");
+                    [gameController rollAllDice];
+                    [gameController printFaces];
+                    hasHeld = NO;
+                } else {
+                    NSLog(@"You haven't chosen at least one die to hold onto yet! Do that first, then roll.");
+                }
                 
             } else if ([userInput isEqualToString:@"hold"]) {
                 
@@ -52,12 +58,19 @@ int main(int argc, const char * argv[]) {
                     
                     NSInteger diceNum = [userInput integerValue];
                     [gameController holdDie:diceNum];
+                    
+                    hasHeld = true;
                 }
+                
             } else if ([userInput isEqualToString:@"reset"]) {
                 
                 [gameController resetDice];
                 
-            } 
+            } else if ([userInput isEqualToString:@"print"]) {
+                
+                [gameController printFaces];
+                
+            }
             
         }
         
