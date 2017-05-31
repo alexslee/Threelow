@@ -9,11 +9,22 @@
 //USE THESE SYMBOLS --> ⚀ ⚁ ⚂ ⚃ ⚄ ⚅
 
 #import <Foundation/Foundation.h>
+#import "Dice.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        NSLog(@"Welcome to Threelow!");
+        
+        //create the array of dice, roll them all once, and display their values
+        NSMutableArray *gameDice = [[NSMutableArray alloc] init];
+        
+        for (unsigned i = 0; i < 6; i++) {
+            gameDice[i] = [[Dice alloc] init];
+            [gameDice[i] roll];
+            NSString *face = [gameDice[i] getFace];
+            NSLog(@"Dice %tu: %@",i,face);
+        }
+        
     }
     return 0;
 }

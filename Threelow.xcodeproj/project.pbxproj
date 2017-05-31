@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		43038DF11EDF272E00EE2DE8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43038DF01EDF272E00EE2DE8 /* main.m */; };
+		43038DF91EDF27F300EE2DE8 /* Dice.m in Sources */ = {isa = PBXBuildFile; fileRef = 43038DF81EDF27F300EE2DE8 /* Dice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		43038DED1EDF272E00EE2DE8 /* Threelow */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Threelow; sourceTree = BUILT_PRODUCTS_DIR; };
 		43038DF01EDF272E00EE2DE8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		43038DF71EDF27F300EE2DE8 /* Dice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dice.h; sourceTree = "<group>"; };
+		43038DF81EDF27F300EE2DE8 /* Dice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dice.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				43038DF01EDF272E00EE2DE8 /* main.m */,
+				43038DF71EDF27F300EE2DE8 /* Dice.h */,
+				43038DF81EDF27F300EE2DE8 /* Dice.m */,
 			);
 			path = Threelow;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43038DF91EDF27F300EE2DE8 /* Dice.m in Sources */,
 				43038DF11EDF272E00EE2DE8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
