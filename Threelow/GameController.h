@@ -20,6 +20,8 @@
 
 @property (nonatomic)NSInteger score;
 
+@property (nonatomic)NSInteger highScore;
+
 /*****METHODS*****/
 
 - (void)rollAllDice;
@@ -29,5 +31,7 @@
 - (void)holdDie:(NSInteger)diceNum;
 
 - (void)resetDice;
+
+- (void)gameOver;
 
 @end

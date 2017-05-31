@@ -23,6 +23,7 @@ int main(int argc, const char * argv[]) {
         [gameController rollAllDice];
         [gameController printFaces];
         
+        NSInteger rollsSinceReset = 4;
         BOOL play = YES;
         BOOL hasHeld = NO;
         while (play) {
@@ -38,8 +39,19 @@ int main(int argc, const char * argv[]) {
                 if (hasHeld) {
                     NSLog(@"New values of dice (a face value wrapped in [] indicates that die has been held):");
                     [gameController rollAllDice];
+                    rollsSinceReset++;
+                    
+                    NSLog(@"=== Current game status ===");
+                    NSLog(@"Rolls since last reset: %ld\n",rollsSinceReset);
                     [gameController printFaces];
                     hasHeld = NO;
+                    
+                    if (rollsSinceReset == 5) {
+                        NSLog(@"===Game over!!===");
+                        [gameController gameOver];
+                        rollsSinceReset = 0;
+                    }
+                    
                 } else {
                     NSLog(@"You haven't chosen at least one die to hold onto yet! Do that first, then roll.");
                 }
@@ -65,9 +77,12 @@ int main(int argc, const char * argv[]) {
             } else if ([userInput isEqualToString:@"reset"]) {
                 
                 [gameController resetDice];
+                rollsSinceReset = 0;
                 
             } else if ([userInput isEqualToString:@"print"]) {
                 
+                NSLog(@"=== Current game status ===");
+                NSLog(@"Rolls since last reset: %ld\n",rollsSinceReset);
                 [gameController printFaces];
                 
             }
