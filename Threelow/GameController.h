@@ -12,13 +12,20 @@
 
 @interface GameController : NSObject
 
+/*****PROPERTIES*****/
+
 @property (nonatomic,strong)NSMutableArray *gameDice;
+
 @property (nonatomic,strong)NSMutableArray *heldDice;
+
+/*****METHODS*****/
 
 - (void)rollAllDice;
 
 - (void)printFaces;
 
 - (void)holdDie:(NSInteger)diceNum;
+
+- (void)resetDice;
 
 @end

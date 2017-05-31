@@ -25,11 +25,13 @@ int main(int argc, const char * argv[]) {
         
         BOOL play = YES;
         while (play) {
-            NSString *userInput = [inputHandler inputForPrompt:@"What would you like to do? (hint --> 'roll' to re-roll the dice | 'hold' to select dice to hold on to/un-hold) | 'quit' to stop playing: "];
+            NSString *userInput = [inputHandler inputForPrompt:@"What would you like to do? (hint --> 'roll' to re-roll the dice | 'hold' to select dice to hold on to/un-hold) | 'reset' to un-hold all dice | 'print' to print all dice values and current score | 'quit' to stop playing: "];
             
             if ([userInput isEqualToString:@"quit"]) {
+                
                 play = NO;
                 continue;
+                
             } else if ([userInput isEqualToString:@"roll"]) {
                 
                 NSLog(@"New values of dice (a face value wrapped in [] indicates that die has been held):");
@@ -37,17 +39,25 @@ int main(int argc, const char * argv[]) {
                 [gameController printFaces];
                 
             } else if ([userInput isEqualToString:@"hold"]) {
+                
                 BOOL holdEntry = YES;
+                
                 while (holdEntry) {
-                    userInput = [inputHandler inputForPrompt:@"Enter the # of the dice you want to keep a hold of (or, 'stop' to cancel): "];
+                    userInput = [inputHandler inputForPrompt:@"Enter the # of the die you want to keep a hold of (or, 'stop' to cancel): "];
+                    
                     if ([userInput isEqualToString:@"stop"]) {
                         holdEntry = NO;
                         continue;
                     }
+                    
                     NSInteger diceNum = [userInput integerValue];
                     [gameController holdDie:diceNum];
                 }
-            }
+            } else if ([userInput isEqualToString:@"reset"]) {
+                
+                [gameController resetDice];
+                
+            } 
             
         }
         

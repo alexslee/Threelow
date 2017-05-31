@@ -71,4 +71,12 @@
     }
 }
 
+- (void)resetDice;
+{
+    //reset every bool tracker in heldDice to false
+    for (unsigned i = 0; i < NUMBEROFDICE; i++) {
+        [_heldDice replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:NO]];
+    }
+}
+
 @end
