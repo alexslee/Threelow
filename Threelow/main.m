@@ -23,11 +23,12 @@ int main(int argc, const char * argv[]) {
         [gameController rollAllDice];
         [gameController printFaces];
         
-        NSInteger rollsSinceReset = 4;
+        NSInteger rollsSinceReset = 0;
+        NSInteger gamesPlayed = 0;
         BOOL play = YES;
         BOOL hasHeld = NO;
         while (play) {
-            NSString *userInput = [inputHandler inputForPrompt:@"What would you like to do? (hint --> 'roll' to re-roll the dice (must hold at least one die before rolling again!) | 'hold' to select dice to hold on to/un-hold) | 'reset' to un-hold all dice | 'print' to print all dice values and current score | 'quit' to stop playing: "];
+            NSString *userInput = [inputHandler inputForPrompt:@"What would you like to do? (hint --> 'roll' to re-roll the dice (must hold at least one die before rolling again!) | 'hold' to select dice to hold on to/un-hold) | 'reset' to un-hold all dice | 'print' to print all dice values and current score | 'new game' to reset the high score, if you've played a game already | 'quit' to stop playing: "];
             
             if ([userInput isEqualToString:@"quit"]) {
                 
@@ -84,6 +85,15 @@ int main(int argc, const char * argv[]) {
                 NSLog(@"=== Current game status ===");
                 NSLog(@"Rolls since last reset: %ld\n",rollsSinceReset);
                 [gameController printFaces];
+                
+            } else if ([userInput isEqualToString:@"new game"]) {
+                
+                if(gamesPlayed > 0) {
+                    NSLog(@"Resetting high score.");
+                    [gameController resetHighScore];
+                } else {
+                    NSLog(@"Play a game first before you reset the high score!");
+                }
                 
             }
             

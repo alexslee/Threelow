@@ -34,4 +34,6 @@
 
 - (void)gameOver;
 
+- (void)resetHighScore;
+
 @end

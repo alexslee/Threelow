@@ -110,4 +110,9 @@
     [self printFaces];
 }
 
+- (void)resetHighScore;
+{
+    _highScore = INFINITY;
+}
+
 @end
