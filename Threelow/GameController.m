@@ -115,4 +115,12 @@
     _highScore = INFINITY;
 }
 
+- (void)easterEgg;
+{
+    _score = 0;
+    _highScore = 0;
+    [self gameOver];
+    
+}
+
 @end

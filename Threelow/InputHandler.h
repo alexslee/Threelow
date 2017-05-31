@@ -13,6 +13,7 @@
 //uses an NSCharacterSet to format the user input
 - (NSString *)parser:(char*)rawInput;
 
+//use the given prompt to ask for input
 - (NSString *)inputForPrompt:(NSString *)promptString;
 
 @end

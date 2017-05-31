@@ -27,6 +27,8 @@ int main(int argc, const char * argv[]) {
         NSInteger gamesPlayed = 0;
         BOOL play = YES;
         BOOL hasHeld = NO;
+        
+        //game loop
         while (play) {
             NSString *userInput = [inputHandler inputForPrompt:@"What would you like to do? (hint --> 'roll' to re-roll the dice (must hold at least one die before rolling again!) | 'hold' to select dice to hold on to/un-hold) | 'reset' to un-hold all dice | 'print' to print all dice values and current score | 'new game' to reset the high score, if you've played a game already | 'quit' to stop playing: "];
             
@@ -36,7 +38,7 @@ int main(int argc, const char * argv[]) {
                 continue;
                 
             } else if ([userInput isEqualToString:@"roll"]) {
-                
+                //only roll if player has held at least one die
                 if (hasHeld) {
                     NSLog(@"New values of dice (a face value wrapped in [] indicates that die has been held):");
                     [gameController rollAllDice];
@@ -46,7 +48,7 @@ int main(int argc, const char * argv[]) {
                     NSLog(@"Rolls since last reset: %ld\n",rollsSinceReset);
                     [gameController printFaces];
                     hasHeld = NO;
-                    
+                    //set limit to # of rolls per game
                     if (rollsSinceReset == 5) {
                         NSLog(@"===Game over!!===");
                         [gameController gameOver];
@@ -60,9 +62,9 @@ int main(int argc, const char * argv[]) {
             } else if ([userInput isEqualToString:@"hold"]) {
                 
                 BOOL holdEntry = YES;
-                
+                //keep allowing user to hold/unhold until 'stop' is entered
                 while (holdEntry) {
-                    userInput = [inputHandler inputForPrompt:@"Enter the # of the die you want to keep a hold of (or, 'stop' to cancel): "];
+                    userInput = [inputHandler inputForPrompt:@"Enter the # of the die you want to keep a hold of (or, 'stop' to stop): "];
                     
                     if ([userInput isEqualToString:@"stop"]) {
                         holdEntry = NO;
@@ -87,7 +89,7 @@ int main(int argc, const char * argv[]) {
                 [gameController printFaces];
                 
             } else if ([userInput isEqualToString:@"new game"]) {
-                
+                //allow user to reset high score if at least one game is played
                 if(gamesPlayed > 0) {
                     NSLog(@"Resetting high score.");
                     [gameController resetHighScore];
@@ -95,6 +97,13 @@ int main(int argc, const char * argv[]) {
                     NSLog(@"Play a game first before you reset the high score!");
                 }
                 
+            } else if ([userInput isEqualToString:@"roIl"]) {
+                //EASTER EGG!
+                NSLog(@"You found the easter egg! You win with a score of 0! Reset this by using 'new game', or try to beat this score (friendly hint - you can't).");
+                [gameController easterEgg];
+                
+            } else {
+                NSLog(@"I'm sorry, I didn't catch that command.");
             }
             
         }
