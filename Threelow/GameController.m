@@ -54,10 +54,18 @@
 - (void)holdDie:(NSInteger)diceNum;
 {
     if (diceNum >= 0 && diceNum < NUMBEROFDICE) {
+        
         //keep track of which dice has been held by parallel indexing in an array of bools
-        BOOL held = true;
-        [_heldDice replaceObjectAtIndex:diceNum withObject:[NSNumber numberWithBool:held]];
-        NSLog(@"Die %ld has been held.",diceNum);
+        BOOL held = NO;
+        if ([[_heldDice objectAtIndex:diceNum] boolValue] == YES) {
+            [_heldDice replaceObjectAtIndex:diceNum withObject:[NSNumber numberWithBool:held]];
+            NSLog(@"Die %ld has been un-held.",diceNum);
+        } else {
+            held = YES;
+            [_heldDice replaceObjectAtIndex:diceNum withObject:[NSNumber numberWithBool:held]];
+            NSLog(@"Die %ld has been held.",diceNum);
+        }
+        
     } else {
         NSLog(@"Error, invalid index given!");
     }
